@@ -1,0 +1,33 @@
+<h2>Country detail</h2>
+
+<!-- Container for the country name -->
+<div class="title-container">
+  <!-- The country name will be dynamically updated -->
+  <h2 id="countryName">Name of the country</h2>
+</div>
+
+<!-- Main container for the information blocks, which holds statistics related to the country -->
+<div class="container">
+  <!-- Block displaying the number of entries (times the country participated in the Olympics) -->
+  <div class="block">
+    <p id="numberOfEntries">Number of entries</p>
+  </div>
+
+  <!-- Block displaying the total number of medals won by the country -->
+  <div class="block">
+    <p id="numberOfMedals">Total number medals</p>
+  </div>
+
+  <!-- Block displaying the total number of athletes who participated for the country -->
+  <div class="block">
+    <p id="numberOfAthletes">Total number of athletes</p>
+  </div>
+</div>
+
+<!-- Canvas element where the Olympic country details chart will be rendered -->
+<canvas id="OlympicCountryDetailsChart"> </canvas>
+
+<div class="button-container">
+  <!-- When clicked, the button triggers the onRetour() method to navigate back to the previous page -->
+  <button id="backButton" (click)="onRetour()">Retour</button>
+</div>

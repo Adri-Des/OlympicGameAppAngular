@@ -1,0 +1,55 @@
+/* Style for each block within the container */
+.block {
+  background-color: white; /* Background color of the block */
+  border: 2px solid #ccc; /* Adds a border around the block */
+  border-color: #3e8c91; /* Custom color for the border */
+  border-radius: 8px; /* Rounds the corners of the block */
+  padding: 5px; /* Internal spacing within the block */
+  margin-bottom: 20px; /* Adds space below each block */
+  margin-right: 20px; /* Adds space to the right of each block */
+  text-align: center; /* Centers the text inside the block */
+  font-size: 20px; /* Font size */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow to give depth */
+}
+
+/* Style for the container holding the blocks */
+.container {
+  display: flex; /* Aligns blocks in a row */
+  width: 100%; /* Full width of the container */
+  max-width: 100%; /* Ensures the container does not exceed 100% of the available space */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 0; /* Removes any internal padding */
+  justify-content: center; /* Centers the blocks inside the container */
+}
+
+/* Style for the country name heading */
+#countryName {
+  display: block; /* Ensures it takes up the full width available */
+  width: 100%; /* Full width within its container */
+  font-size: 35px; /*Font size */
+  font-weight: bold; /* Makes the font bold */
+  margin-bottom: 20px; /* Adds space below the title */
+  background-color: #3e8c91; /* Background color for the title */
+  color: white; /* Text color to white */
+  text-align: center; /* Centers the text */
+  border-radius: 8px; /* Rounds the corners of the title block */
+}
+
+/* Style for the container holding the title */
+.title-container {
+  width: 80%; /*Width to 80% of its parent container */
+  max-width: 400px; /*Maximum width for the title container */
+  margin: 0 auto; /* Centers the container within its parent */
+}
+
+/* Style for the back button */
+#backButton {
+  border-radius: 5px; /* Rounds the corners of the button */
+  width: 80px; /* Fixed width for the button */
+}
+
+/* Style for the container holding the back button */
+.button-container {
+  display: flex; /* Aligns children (button) in a row */
+  justify-content: center; /* Centers the button within the container */
+}

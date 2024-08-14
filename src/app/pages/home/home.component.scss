@@ -1,0 +1,70 @@
+.block {
+  background-color: white; /* Background color of the block */
+  border: 2px solid; /* Border width */
+  border-color: #3e8c91; /* Border color */
+  border-radius: 8px; /* Rounds the corners of the block */
+  padding: 20px; /* Internal spacing within the block */
+  margin-bottom: 20px; /* Space below each block (to separate stacked blocks) */
+  margin-right: 20px; /* Space to the right of each block */
+  text-align: center; /* Centers the text inside the block */
+  font-size: 20px; /* Font size for the text inside the block */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for a slight 3D effect */
+}
+
+.container {
+  display: flex; /* Makes the container a flexbox for horizontal alignment */
+  width: 100%; /* Full width of the container */
+  max-width: 100%; /* Maximum width is set to 100% to prevent overflow */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 0; /* Removes any internal padding */
+  justify-content: center; /* Centers the blocks inside the container */
+}
+
+#OlympicCountryChart {
+  width: 30%; /* Width to 30% of its container */
+  height: auto; /* Height adjusts automatically to maintain aspect ratio */
+  max-width: 1000px; /* Maximum width is limited to 1000px */
+}
+
+.canvasContainer {
+  display: flex; /* Makes the container a flexbox */
+  justify-content: center; /* Centers the canvas inside the container */
+}
+
+.chart-title {
+  display: block; /* Forces the title to be displayed as a block element */
+  width: 100%; /* Title takes up the full width of its container */
+  font-size: 35px; /* Font size for the title */
+  font-weight: bold; /* Makes the title text bold */
+  margin-bottom: 20px; /* Adds space below the title */
+  background-color: #3e8c91; /* Background color for the title */
+  color: white; /* Text color for the title */
+  text-align: center; /* Centers the title text */
+  border-radius: 8px; /* Rounds the corners of the title box */
+}
+
+.title-container {
+  width: 80%; /* The container takes up 80% of the parent width */
+  max-width: 400px; /* Maximum width for the container */
+  margin: 0 auto; /* Centers the container horizontally */
+}
+
+.label-container {
+  position: absolute; /* Positions the container relative to its nearest positioned ancestor */
+  top: 0; /* Aligns the container to the top of its parent */
+  left: 0; /* Aligns the container to the left of its parent */
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+}
+
+.label {
+  position: absolute; /* Positions the label absolutely within the label-container */
+  font-size: 14px; /* Font size for the label text */
+}
+
+//.line {
+//  position: absolute; /* Positions the line absolutely within the label-container */
+//  width: 50px; /* Sets the line's width */
+// height: 2px; /* Sets the line's height (thickness) */
+//  background-color: #000; /* Sets the line color to black */
+//}

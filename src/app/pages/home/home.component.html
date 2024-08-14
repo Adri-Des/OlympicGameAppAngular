@@ -1,3 +1,33 @@
 <h2>Olympic games app</h2>
 <hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+
+<!-- Container for the title of the chart -->
+<div class="title-container">
+  <h2 class="chart-title">Medals per Country</h2>
+</div>
+
+<!-- Container holding the information blocks -->
+<div class="container">
+  <!-- Block displaying the number of Olympic Games -->
+  <div class="block">
+    <p id="numberOfJo">Number of JOs</p>
+  </div>
+
+  <!-- Block displaying the number of participating countries -->
+  <div class="block">
+    <p id="numberOfCountries">Number of countries</p>
+  </div>
+</div>
+
+<!--<div class="label-container">
+  <div class="label" style="top: 20px; left: 500px">
+    <span>Italy</span>
+    <div class="line" style="top: 20px; left: -50px"></div>
+  </div>
+ 
+</div>-->
+
+<!-- Container for the chart canvas -->
+<div class="canvasContainer">
+  <canvas id="OlympicCountryChart"></canvas>
+</div>
