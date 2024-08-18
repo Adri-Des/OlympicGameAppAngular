@@ -106,7 +106,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     const { totalMedals } = this.olympicService.getTotalMedals(medals);
 
     //Get the number of participation for the selected country
-    const nbEntries = participations.length;
+    const nbEntries = this.olympicService.getNumberOfJo(participations);
 
     // Get the chart's canvas element
     const chart = document.getElementById(

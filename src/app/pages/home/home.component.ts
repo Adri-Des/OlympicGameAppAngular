@@ -79,7 +79,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     // Display the number of Olympic Games each country has participated in.
     countries.forEach((country) => {
-      const numberJo = country.participations.length;
+      const numberJo = this.olympicService.getNumberOfJo(
+        country.participations
+      );
 
       const numberOfJo = document.getElementById('numberOfJo');
       if (numberOfJo) {
@@ -172,7 +174,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             },
             color: (context) => context.dataset.backgroundColor as string,
 
-            offset: 10,
+            offset: function (context) {
+              return context.chart.width < 500 ? 5 : 10;
+            },
             clamp: true,
             clip: false,
             //textAlign: 'start',

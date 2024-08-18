@@ -115,4 +115,8 @@ export class OlympicService {
 
     return { athletes };
   }
+
+  getNumberOfJo(participations: OlympicCountryParticipation[]): number {
+    return participations.length;
+  }
 }
