@@ -14,7 +14,7 @@
 .container {
   display: flex; /* Makes the container a flexbox for horizontal alignment */
   width: 100%; /* Full width of the container */
-  max-width: 100%; /* Maximum width is set to 100% to prevent overflow */
+  //max-width: 100%; /* Maximum width is set to 100% to prevent overflow */
   margin: 0 auto; /* Centers the container horizontally */
   padding: 0; /* Removes any internal padding */
   justify-content: center; /* Centers the blocks inside the container */
@@ -24,11 +24,19 @@
   width: 30%; /* Width to 30% of its container */
   height: auto; /* Height adjusts automatically to maintain aspect ratio */
   max-width: 1000px; /* Maximum width is limited to 1000px */
+  //overflow: visible;
+}
+
+@media (max-width: 950px) {
+  #OlympicCountryChart {
+    width: 85%; /*Adapt chart size on small screens */
+  }
 }
 
 .canvasContainer {
   display: flex; /* Makes the container a flexbox */
   justify-content: center; /* Centers the canvas inside the container */
+  overflow: visible;
 }
 
 .chart-title {
@@ -58,7 +66,7 @@
 }
 
 .label {
-  position: absolute; /* Positions the label absolutely within the label-container */
+  position: absolute; /* Positions the label within the label-container */
   font-size: 14px; /* Font size for the label text */
 }
 

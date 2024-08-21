@@ -168,19 +168,23 @@ export class HomeComponent implements OnInit, OnDestroy {
           },*/
           datalabels: {
             anchor: 'end',
+
             align: 'end',
+
             formatter: function (value, context) {
               return context.chart.data.labels![context.dataIndex];
             },
             color: (context) => context.dataset.backgroundColor as string,
 
             offset: function (context) {
-              return context.chart.width < 500 ? 5 : 10;
+              return context.chart.width < 950 ? 0 : 10;
             },
+
             clamp: true,
             clip: false,
             //textAlign: 'start',
             display: true,
+
             /*labels: {
               title: {
                 font: {

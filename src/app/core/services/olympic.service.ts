@@ -116,6 +116,11 @@ export class OlympicService {
     return { athletes };
   }
 
+  /**
+   * Extracts the number of partcipations in Olympic games.
+   * @param participations Interface with a list of a country's participations in the Olympic Games.
+   * @returns Number of participation.
+   */
   getNumberOfJo(participations: OlympicCountryParticipation[]): number {
     return participations.length;
   }
