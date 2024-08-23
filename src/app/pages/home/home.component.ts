@@ -177,7 +177,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 tooltipsCstm.style.color = '#fff';
                 tooltipsCstm.style.pointerEvents = 'none';
                 tooltipsCstm.style.position = 'absolute';
-                tooltipsCstm.style.transform = 'translate(-20%, -20%)';
+                tooltipsCstm.style.transform = 'translate(-80%, -80%)';
                 tooltipsCstm.style.padding = '10px';
 
                 document.body.appendChild(tooltipsCstm);
