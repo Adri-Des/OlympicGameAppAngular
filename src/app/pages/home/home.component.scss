@@ -70,6 +70,42 @@
   font-size: 14px; /* Font size for the label text */
 }
 
+/*#chartjs-tooltip {
+  background: #3e8c91;
+  border-radius: 3px;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translate(-20%, -20%);
+  padding: 10px;
+  transition: opacity 0.1s ease;
+}*/
+
+/* Style pour la pointe du tooltip */
+/*#chartjs-tooltip-tip {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 6px solid #3e8c91;
+  position: absolute;
+  left: 38%;
+  bottom: -6px;
+}*/
+
+hr {
+  border: 0;
+  height: 6px;
+  /* Gradient using the colors of the Olympic rings */
+  background: linear-gradient(
+    to right,
+    #0085c7,
+    #f4c300,
+    #000000,
+    #009f3d,
+    #df0024
+  );
+}
+
 //.line {
 //  position: absolute; /* Positions the line absolutely within the label-container */
 //  width: 50px; /* Sets the line's width */

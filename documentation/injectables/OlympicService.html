@@ -164,6 +164,9 @@
                                 <a href="#getNumberOfAthletes" >getNumberOfAthletes</a>
                             </li>
                             <li>
+                                <a href="#getNumberOfJo" >getNumberOfJo</a>
+                            </li>
+                            <li>
                                 <a href="#getOlympics" >getOlympics</a>
                             </li>
                             <li>
@@ -462,6 +465,81 @@
                         </div>
                             <div class="io-description">
                                 <p>Array of the number of athletes per participation.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNumberOfJo"></a>
+                    <span class="name">
+                        <span ><b>getNumberOfJo</b></span>
+                        <a href="#getNumberOfJo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNumberOfJo(participations: OlympicCountryParticipation[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/core/services/olympic.service.ts:124</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Extracts the number of partcipations in Olympic games.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>participations</td>
+                                            <td>
+                                                        <code>OlympicCountryParticipation[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Interface with a list of a country&#39;s participations in the Olympic Games.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Number of participation.</p>
 
                             </div>
                 </td>
@@ -903,6 +981,15 @@ export class OlympicService {
     );
 
     return { athletes };
+  }
+
+  /**
+   * Extracts the number of partcipations in Olympic games.
+   * @param participations Interface with a list of a country&#x27;s participations in the Olympic Games.
+   * @returns Number of participation.
+   */
+  getNumberOfJo(participations: OlympicCountryParticipation[]): number {
+    return participations.length;
   }
 }
 </code></pre>

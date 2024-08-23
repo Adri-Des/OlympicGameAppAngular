@@ -51,6 +51,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.homeSubscription) {
       this.homeSubscription.unsubscribe();
     }
+
+    const tooltipsCstm = document.getElementById('chartjs-tooltip');
+    if (tooltipsCstm) {
+      tooltipsCstm.style.opacity = '0'; // Hide tooltip
+      setTimeout(() => {
+        tooltipsCstm.remove(); // Remove tooltip element
+      }, 300); // Delay to allow fade out effect
+    }
   }
 
   /**
@@ -118,8 +126,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           return ' #9c80b6 ';
         case 'Spain':
           return ' #9bc3dc ';
-        //case 'UK':
-        //return ' #a6dbeb';
         default:
           return ' #f2f3f4 ';
       }
@@ -133,7 +139,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         labels: countryNames,
         datasets: [
           {
-            label: 'Medals',
+            //label: 'medals',
             data: total,
             backgroundColor: countryColors,
           },
@@ -154,18 +160,82 @@ export class HomeComponent implements OnInit, OnDestroy {
           },*/
 
           tooltip: {
-            backgroundColor: '#3e8c91',
-          },
-          /*tooltip: {
-            callbacks: {
-              label: function (tooltipItem) {
-                const medalEmoji = '🏅'; // Emoji de médaille
-                const label = tooltipItem.label || '';
-                const value = tooltipItem.raw || 0;
-                return `${medalEmoji} ${label}: ${value}`;
-              },
+            //backgroundColor: '#3e8c91',
+            //usePointStyle: false,
+
+            enabled: false, // Disable the default tooltip to use a custom one
+            external: function (context) {
+              // Tooltip Element
+              let tooltipsCstm = document.getElementById('chartjs-tooltip');
+
+              // tooltip style
+              if (!tooltipsCstm) {
+                tooltipsCstm = document.createElement('div');
+                tooltipsCstm.id = 'chartjs-tooltip';
+                tooltipsCstm.style.background = '#3e8c91';
+                tooltipsCstm.style.borderRadius = '3px';
+                tooltipsCstm.style.color = '#fff';
+                tooltipsCstm.style.pointerEvents = 'none';
+                tooltipsCstm.style.position = 'absolute';
+                tooltipsCstm.style.transform = 'translate(-20%, -20%)';
+                tooltipsCstm.style.padding = '10px';
+
+                document.body.appendChild(tooltipsCstm);
+              }
+
+              // Hide if no tooltip
+              const tooltipModel = context.tooltip;
+              if (tooltipModel.opacity === 0) {
+                tooltipsCstm.style.opacity = '0';
+                return;
+              }
+
+              // Set the text
+              if (tooltipModel.body) {
+                const medalEmoji = '🏅';
+                const title = tooltipModel.title[0] || '';
+                const value = tooltipModel.body[0].lines[0] || '';
+
+                let innerHtml = `<div><strong> ${title}</strong></div>`;
+                innerHtml += `<div>${medalEmoji} ${value}</div>`;
+
+                tooltipsCstm.innerHTML = innerHtml;
+
+                // Create the tip to the tooltip
+                const tip = document.createElement('div');
+                tip.id = 'chartjs-tooltip-tip';
+
+                tip.style.borderLeft = '10px solid transparent';
+                tip.style.borderRight = '10px solid transparent';
+                tip.style.borderTop = '6px solid #3e8c91';
+                tip.style.position = 'absolute';
+                tip.style.left = '38%';
+                tip.style.bottom = '-6px';
+                tooltipsCstm.appendChild(tip);
+              }
+
+              // Positioning
+
+              /*const position = context.chart.canvas.getBoundingClientRect();
+              tooltipsCstm.style.opacity = '1';
+              tooltipsCstm.style.left =
+                position.left + window.scrollX + tooltipModel.caretX + 'px';
+              tooltipsCstm.style.top =
+                position.top + window.scrollY + tooltipModel.caretY + 'px';*/
+              const position = context.chart.canvas.getBoundingClientRect();
+
+              //const mouseX = tooltipModel.dataPoints[0].element.x;
+              //const mouseY = tooltipModel.dataPoints[0].element.y;
+              const mouseX = tooltipModel.caretX;
+              const mouseY = tooltipModel.caretY;
+              tooltipsCstm.style.opacity = '1';
+              tooltipsCstm.style.left = position.left + mouseX + 'px';
+              tooltipsCstm.style.top = position.top + mouseY + 'px';
+
+              console.log(mouseX, mouseY);
             },
-          },*/
+          },
+
           datalabels: {
             anchor: 'end',
 
@@ -184,14 +254,6 @@ export class HomeComponent implements OnInit, OnDestroy {
             clip: false,
             //textAlign: 'start',
             display: true,
-
-            /*labels: {
-              title: {
-                font: {
-                  size: 4,
-                },
-              },
-            },*/
           },
         },
 

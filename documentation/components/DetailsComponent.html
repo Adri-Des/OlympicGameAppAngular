@@ -515,8 +515,8 @@ If the selected country is found, it creates the Olympic details chart.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/pages/details/details.component.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/pages/details/details.component.ts:202</a></div>
                         </td>
                     </tr>
 
@@ -796,7 +796,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     const { totalMedals } &#x3D; this.olympicService.getTotalMedals(medals);
 
     //Get the number of participation for the selected country
-    const nbEntries &#x3D; participations.length;
+    const nbEntries &#x3D; this.olympicService.getNumberOfJo(participations);
 
     // Get the chart&#x27;s canvas element
     const chart &#x3D; document.getElementById(
@@ -827,8 +827,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       case &#x27;Spain&#x27;:
         colorCountry &#x3D; &#x27; #9bc3dc &#x27;;
         break;
-      //case &#x27;UK&#x27;:
-      //return &#x27; #a6dbeb&#x27;;
       default:
         colorCountry &#x3D; &#x27; #f2f3f4 &#x27;;
     }

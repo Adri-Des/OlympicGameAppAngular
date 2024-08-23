@@ -137,8 +137,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       case 'Spain':
         colorCountry = ' #9bc3dc ';
         break;
-      //case 'UK':
-      //return ' #a6dbeb';
       default:
         colorCountry = ' #f2f3f4 ';
     }

@@ -336,8 +336,8 @@ and Router for navigation.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/pages/home/home.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/pages/home/home.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -607,6 +607,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.homeSubscription) {
       this.homeSubscription.unsubscribe();
     }
+
+    const tooltipsCstm &#x3D; document.getElementById(&#x27;chartjs-tooltip&#x27;);
+    if (tooltipsCstm) {
+      tooltipsCstm.style.opacity &#x3D; &#x27;0&#x27;; // Hide tooltip
+      setTimeout(() &#x3D;&gt; {
+        tooltipsCstm.remove(); // Remove tooltip element
+      }, 300); // Delay to allow fade out effect
+    }
   }
 
   /**
@@ -635,7 +643,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     // Display the number of Olympic Games each country has participated in.
     countries.forEach((country) &#x3D;&gt; {
-      const numberJo &#x3D; country.participations.length;
+      const numberJo &#x3D; this.olympicService.getNumberOfJo(
+        country.participations
+      );
 
       const numberOfJo &#x3D; document.getElementById(&#x27;numberOfJo&#x27;);
       if (numberOfJo) {
@@ -672,8 +682,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           return &#x27; #9c80b6 &#x27;;
         case &#x27;Spain&#x27;:
           return &#x27; #9bc3dc &#x27;;
-        //case &#x27;UK&#x27;:
-        //return &#x27; #a6dbeb&#x27;;
         default:
           return &#x27; #f2f3f4 &#x27;;
       }
@@ -687,7 +695,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         labels: countryNames,
         datasets: [
           {
-            label: &#x27;Medals&#x27;,
+            //label: &#x27;medals&#x27;,
             data: total,
             backgroundColor: countryColors,
           },
@@ -708,31 +716,91 @@ export class HomeComponent implements OnInit, OnDestroy {
           },*/
 
           tooltip: {
-            backgroundColor: &#x27;#3e8c91&#x27;,
-          },
-          /*tooltip: {
-            callbacks: {
-              label: function (tooltipItem) {
-                const medalEmoji &#x3D; &#x27;🏅&#x27;; // Emoji de médaille
-                const label &#x3D; tooltipItem.label || &#x27;&#x27;;
-                const value &#x3D; tooltipItem.raw || 0;
-                return &#x60;${medalEmoji} ${label}: ${value}&#x60;;
-              },
+            //backgroundColor: &#x27;#3e8c91&#x27;,
+            //usePointStyle: false,
+
+            enabled: false, // Disable the default tooltip to use a custom one
+            external: function (context) {
+              // Tooltip Element
+              let tooltipsCstm &#x3D; document.getElementById(&#x27;chartjs-tooltip&#x27;);
+
+              // tooltip style
+              if (!tooltipsCstm) {
+                tooltipsCstm &#x3D; document.createElement(&#x27;div&#x27;);
+                tooltipsCstm.id &#x3D; &#x27;chartjs-tooltip&#x27;;
+                tooltipsCstm.style.background &#x3D; &#x27;#3e8c91&#x27;;
+                tooltipsCstm.style.borderRadius &#x3D; &#x27;3px&#x27;;
+                tooltipsCstm.style.color &#x3D; &#x27;#fff&#x27;;
+                tooltipsCstm.style.opacity &#x3D; &#x27;0&#x27;;
+                tooltipsCstm.style.pointerEvents &#x3D; &#x27;none&#x27;;
+                tooltipsCstm.style.position &#x3D; &#x27;absolute&#x27;;
+                tooltipsCstm.style.transform &#x3D; &#x27;translate(-20%, -20%)&#x27;;
+                tooltipsCstm.style.padding &#x3D; &#x27;10px&#x27;;
+
+                document.body.appendChild(tooltipsCstm);
+              }
+
+              // Hide if no tooltip
+              const tooltipModel &#x3D; context.tooltip;
+              if (tooltipModel.opacity &#x3D;&#x3D;&#x3D; 0) {
+                tooltipsCstm.style.opacity &#x3D; &#x27;0&#x27;;
+                return;
+              }
+
+              // Set the text
+              if (tooltipModel.body) {
+                const medalEmoji &#x3D; &#x27;🏅&#x27;; // Emoji
+                const title &#x3D; tooltipModel.title[0] || &#x27;&#x27;;
+                const value &#x3D; tooltipModel.body[0].lines[0] || &#x27;&#x27;;
+
+                let innerHtml &#x3D; &#x60;&lt;div&gt;&lt;strong&gt; ${title}&lt;/strong&gt;&lt;/div&gt;&#x60;;
+                innerHtml +&#x3D; &#x60;&lt;div&gt;${medalEmoji} ${value}&lt;/div&gt;&#x60;;
+
+                tooltipsCstm.innerHTML &#x3D; innerHtml;
+
+                // Create the tip to the tooltip
+                const tip &#x3D; document.createElement(&#x27;div&#x27;);
+                tip.id &#x3D; &#x27;chartjs-tooltip-tip&#x27;;
+
+                tip.style.borderLeft &#x3D; &#x27;10px solid transparent&#x27;;
+                tip.style.borderRight &#x3D; &#x27;10px solid transparent&#x27;;
+                tip.style.borderTop &#x3D; &#x27;6px solid #3e8c91&#x27;;
+                tip.style.position &#x3D; &#x27;absolute&#x27;;
+                tip.style.left &#x3D; &#x27;38%&#x27;;
+                tip.style.bottom &#x3D; &#x27;-6px&#x27;;
+                tooltipsCstm.appendChild(tip);
+              }
+
+              // Positioning
+
+              const position &#x3D; context.chart.canvas.getBoundingClientRect();
+              tooltipsCstm.style.opacity &#x3D; &#x27;1&#x27;;
+              tooltipsCstm.style.left &#x3D;
+                position.left + window.scrollX + tooltipModel.caretX + &#x27;px&#x27;;
+              tooltipsCstm.style.top &#x3D;
+                position.top + window.scrollY + tooltipModel.caretY + &#x27;px&#x27;;
             },
-          },*/
+          },
+
           datalabels: {
             anchor: &#x27;end&#x27;,
+
             align: &#x27;end&#x27;,
+
             formatter: function (value, context) {
               return context.chart.data.labels![context.dataIndex];
             },
             color: (context) &#x3D;&gt; context.dataset.backgroundColor as string,
 
-            offset: 10,
+            offset: function (context) {
+              return context.chart.width &lt; 950 ? 0 : 10;
+            },
+
             clamp: true,
             clip: false,
             //textAlign: &#x27;start&#x27;,
             display: true,
+
             /*labels: {
               title: {
                 font: {
@@ -761,7 +829,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;h2&gt;Olympic games app&lt;/h2&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;!--&lt;h2&gt;Olympic games app&lt;/h2&gt;--&gt;
+&lt;img src&#x3D;&quot;assets/olympic-rings-flag.jpg &quot; width&#x3D;&quot;130&quot; height&#x3D;&quot;90&quot; /&gt;
 &lt;hr /&gt;
 
 &lt;!-- Container for the title of the chart --&gt;
@@ -817,7 +886,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 .container {
   display: flex; /* Makes the container a flexbox for horizontal alignment */
   width: 100%; /* Full width of the container */
-  max-width: 100%; /* Maximum width is set to 100% to prevent overflow */
+  //max-width: 100%; /* Maximum width is set to 100% to prevent overflow */
   margin: 0 auto; /* Centers the container horizontally */
   padding: 0; /* Removes any internal padding */
   justify-content: center; /* Centers the blocks inside the container */
@@ -827,11 +896,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   width: 30%; /* Width to 30% of its container */
   height: auto; /* Height adjusts automatically to maintain aspect ratio */
   max-width: 1000px; /* Maximum width is limited to 1000px */
+  //overflow: visible;
+}
+
+@media (max-width: 950px) {
+  #OlympicCountryChart {
+    width: 85%; /*Adapt chart size on small screens */
+  }
 }
 
 .canvasContainer {
   display: flex; /* Makes the container a flexbox */
   justify-content: center; /* Centers the canvas inside the container */
+  overflow: visible;
 }
 
 .chart-title {
@@ -861,8 +938,44 @@ export class HomeComponent implements OnInit, OnDestroy {
 }
 
 .label {
-  position: absolute; /* Positions the label absolutely within the label-container */
+  position: absolute; /* Positions the label within the label-container */
   font-size: 14px; /* Font size for the label text */
+}
+
+/*#chartjs-tooltip {
+  background: #3e8c91;
+  border-radius: 3px;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translate(-20%, -20%);
+  padding: 10px;
+  transition: opacity 0.1s ease;
+}*/
+
+/* Style pour la pointe du tooltip */
+/*#chartjs-tooltip-tip {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 6px solid #3e8c91;
+  position: absolute;
+  left: 38%;
+  bottom: -6px;
+}*/
+
+hr {
+  border: 0;
+  height: 6px;
+  /* Gradient using the colors of the Olympic rings */
+  background: linear-gradient(
+    to right,
+    #0085c7,
+    #f4c300,
+    #000000,
+    #009f3d,
+    #df0024
+  );
 }
 
 //.line {
@@ -899,7 +1012,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h2>Olympic games app</h2><hr /><!-- Container for the title of the chart --><div class="title-container">  <h2 class="chart-title">Medals per Country</h2></div><!-- Container holding the information blocks --><div class="container">  <!-- Block displaying the number of Olympic Games -->  <div class="block">    <p id="numberOfJo">Number of JOs</p>  </div>  <!-- Block displaying the number of participating countries -->  <div class="block">    <p id="numberOfCountries">Number of countries</p>  </div></div><!--<div class="label-container">  <div class="label" style="top: 20px; left: 500px">    <span>Italy</span>    <div class="line" style="top: 20px; left: -50px"></div>  </div> </div>--><!-- Container for the chart canvas --><div class="canvasContainer">  <canvas id="OlympicCountryChart"></canvas></div></div>'
+        var COMPONENT_TEMPLATE = '<div><!--<h2>Olympic games app</h2>--><img src="assets/olympic-rings-flag.jpg " width="130" height="90" /><hr /><!-- Container for the title of the chart --><div class="title-container">  <h2 class="chart-title">Medals per Country</h2></div><!-- Container holding the information blocks --><div class="container">  <!-- Block displaying the number of Olympic Games -->  <div class="block">    <p id="numberOfJo">Number of JOs</p>  </div>  <!-- Block displaying the number of participating countries -->  <div class="block">    <p id="numberOfCountries">Number of countries</p>  </div></div><!--<div class="label-container">  <div class="label" style="top: 20px; left: 500px">    <span>Italy</span>    <div class="line" style="top: 20px; left: -50px"></div>  </div> </div>--><!-- Container for the chart canvas --><div class="canvasContainer">  <canvas id="OlympicCountryChart"></canvas></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetailsComponent', 'selector': 'app-details'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};
