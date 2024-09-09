@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Don't forget to install your node_modules before starting (`npm install`).
 
-## Development server
+## Start the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+Run `npm run start`. Navigate to `http://localhost:4200/`. 
 
 ## Build
 
