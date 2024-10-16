@@ -63,7 +63,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         if (this.selectedCountry) {
           this.createOlympicDetailsChart(this.selectedCountry.participations);
         } else {
-          this.router.navigate(['/not-found']); // Redirection vers la page Not Found
+          this.router.navigate(['**']); // Redirect to Not Found page
           return;
         }
       }
