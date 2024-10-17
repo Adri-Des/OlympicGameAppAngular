@@ -731,10 +731,9 @@ export class HomeComponent implements OnInit, OnDestroy {
                 tooltipsCstm.style.background &#x3D; &#x27;#3e8c91&#x27;;
                 tooltipsCstm.style.borderRadius &#x3D; &#x27;3px&#x27;;
                 tooltipsCstm.style.color &#x3D; &#x27;#fff&#x27;;
-                tooltipsCstm.style.opacity &#x3D; &#x27;0&#x27;;
                 tooltipsCstm.style.pointerEvents &#x3D; &#x27;none&#x27;;
                 tooltipsCstm.style.position &#x3D; &#x27;absolute&#x27;;
-                tooltipsCstm.style.transform &#x3D; &#x27;translate(-20%, -20%)&#x27;;
+                tooltipsCstm.style.transform &#x3D; &#x27;translate(-80%, -80%)&#x27;;
                 tooltipsCstm.style.padding &#x3D; &#x27;10px&#x27;;
 
                 document.body.appendChild(tooltipsCstm);
@@ -749,7 +748,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
               // Set the text
               if (tooltipModel.body) {
-                const medalEmoji &#x3D; &#x27;🏅&#x27;; // Emoji
+                const medalEmoji &#x3D; &#x27;🏅&#x27;;
                 const title &#x3D; tooltipModel.title[0] || &#x27;&#x27;;
                 const value &#x3D; tooltipModel.body[0].lines[0] || &#x27;&#x27;;
 
@@ -773,12 +772,23 @@ export class HomeComponent implements OnInit, OnDestroy {
 
               // Positioning
 
-              const position &#x3D; context.chart.canvas.getBoundingClientRect();
+              /*const position &#x3D; context.chart.canvas.getBoundingClientRect();
               tooltipsCstm.style.opacity &#x3D; &#x27;1&#x27;;
               tooltipsCstm.style.left &#x3D;
                 position.left + window.scrollX + tooltipModel.caretX + &#x27;px&#x27;;
               tooltipsCstm.style.top &#x3D;
-                position.top + window.scrollY + tooltipModel.caretY + &#x27;px&#x27;;
+                position.top + window.scrollY + tooltipModel.caretY + &#x27;px&#x27;;*/
+              const position &#x3D; context.chart.canvas.getBoundingClientRect();
+
+              //const mouseX &#x3D; tooltipModel.dataPoints[0].element.x;
+              //const mouseY &#x3D; tooltipModel.dataPoints[0].element.y;
+              const mouseX &#x3D; tooltipModel.caretX;
+              const mouseY &#x3D; tooltipModel.caretY;
+              tooltipsCstm.style.opacity &#x3D; &#x27;1&#x27;;
+              tooltipsCstm.style.left &#x3D; position.left + mouseX + &#x27;px&#x27;;
+              tooltipsCstm.style.top &#x3D; position.top + mouseY + &#x27;px&#x27;;
+
+              //console.log(mouseX, mouseY);
             },
           },
 
@@ -800,14 +810,6 @@ export class HomeComponent implements OnInit, OnDestroy {
             clip: false,
             //textAlign: &#x27;start&#x27;,
             display: true,
-
-            /*labels: {
-              title: {
-                font: {
-                  size: 4,
-                },
-              },
-            },*/
           },
         },
 
@@ -949,9 +951,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  transform: translate(-20%, -20%);
+  transform: translate(-80%, -80%);
   padding: 10px;
-  transition: opacity 0.1s ease;
+ 
 }*/
 
 /* Style pour la pointe du tooltip */

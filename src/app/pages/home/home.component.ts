@@ -232,7 +232,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               tooltipsCstm.style.left = position.left + mouseX + 'px';
               tooltipsCstm.style.top = position.top + mouseY + 'px';
 
-              console.log(mouseX, mouseY);
+              //console.log(mouseX, mouseY);
             },
           },
 

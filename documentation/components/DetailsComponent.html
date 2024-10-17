@@ -359,8 +359,8 @@ ActivatedRoute for accessing route parameters, and Router for navigation.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/pages/details/details.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/pages/details/details.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -434,8 +434,8 @@ It uses the Chart.js library to render the chart in a canvas element.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/app/pages/details/details.component.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/pages/details/details.component.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -515,8 +515,8 @@ If the selected country is found, it creates the Olympic details chart.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="202"
-                                    class="link-to-prism">src/app/pages/details/details.component.ts:202</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/pages/details/details.component.ts:205</a></div>
                         </td>
                     </tr>
 
@@ -752,6 +752,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
         );
         if (this.selectedCountry) {
           this.createOlympicDetailsChart(this.selectedCountry.participations);
+        } else {
+          this.router.navigate([&#x27;**&#x27;]); // Redirect to Not Found page
+          return;
         }
       }
     );
